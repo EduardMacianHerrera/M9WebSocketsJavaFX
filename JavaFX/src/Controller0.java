@@ -52,12 +52,12 @@ public class Controller0 implements Initializable {
         UtilsViews.setViewAnimating("View1");
     }
 
-    private void showLoading () {
+    private void showLoading() {
         loadingCounter++;
         loading.setVisible(true);
     }
 
-    private void hideLoading () {
+    private void hideLoading() {
         loadingCounter--;
         if (loadingCounter <= 0) {
             loadingCounter = 0;
@@ -65,7 +65,7 @@ public class Controller0 implements Initializable {
         }
     }
 
-    private void showError () {
+    private void showError() {
         // Show the error
         txtError.setVisible(true);
 
@@ -80,13 +80,14 @@ public class Controller0 implements Initializable {
         obj.put("type", "marques");
 
         showLoading();
-        UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", obj.toString(), (response) -> {
-            loadBrandsListCallback(response);
-            hideLoading();
-        });
+        UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", obj.toString(),
+                (response) -> {
+                    loadBrandsListCallback(response);
+                    hideLoading();
+                });
     }
 
-    private void loadBrandsListCallback (String response) {
+    private void loadBrandsListCallback(String response) {
 
         JSONObject objResponse = new JSONObject(response);
 
@@ -113,7 +114,7 @@ public class Controller0 implements Initializable {
     }
 
     @FXML
-    private void loadBrandConsoles (String brand) {
+    private void loadBrandConsoles(String brand) {
 
         // Set selected brand in label
         txtSelected.setText(choiceBox.getValue());
@@ -128,13 +129,14 @@ public class Controller0 implements Initializable {
 
         // Ask for data
         showLoading();
-        UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", obj.toString(), (response) -> {
-            loadBrandConsolesCallback(response);
-            hideLoading();
-        });
+        UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", obj.toString(),
+                (response) -> {
+                    loadBrandConsolesCallback(response);
+                    hideLoading();
+                });
     }
 
-    private void loadBrandConsolesCallback (String response) {
+    private void loadBrandConsolesCallback(String response) {
 
         JSONObject objResponse = new JSONObject(response);
 
@@ -157,12 +159,12 @@ public class Controller0 implements Initializable {
                     FXMLLoader loader = new FXMLLoader(resource);
                     Parent itemTemplate = loader.load();
                     ControllerItem itemController = loader.getController();
-                
+
                     // Fill template with console information
                     itemController.setTitle(console.getString("name"));
                     itemController.setSubtitle(console.getString("processor"));
                     itemController.setColor(console.getString("color"));
-                    
+
                     // Add template to the list
                     vBoxList.getChildren().add(itemTemplate);
 
@@ -176,23 +178,24 @@ public class Controller0 implements Initializable {
         }
     }
 
-    public void loadConsoleInfo (String consoleName) {
+    public void loadConsoleInfo(String consoleName) {
 
         JSONObject obj = new JSONObject("{}");
         obj.put("type", "consola");
         obj.put("name", consoleName);
 
         showLoading();
-        UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", obj.toString(), (response) -> {
-            loadConsoleInfoCallback(response);
-            hideLoading();
-        });
+        UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", obj.toString(),
+                (response) -> {
+                    loadConsoleInfoCallback(response);
+                    hideLoading();
+                });
     }
 
-    private void loadConsoleInfoCallback (String response) {
+    private void loadConsoleInfoCallback(String response) {
 
         JSONObject objResponse = new JSONObject(response);
-        
+
         if (objResponse.getString("status").equals("OK")) {
 
             JSONObject console = objResponse.getJSONObject("result");
@@ -201,11 +204,12 @@ public class Controller0 implements Initializable {
             txtName.setText(console.getString("name"));
             txtDate.setText(console.getString("date"));
             txtBrand.setText(console.getString("brand"));
-    
-            try{
+
+            try {
                 // Load console image
-                Image image = new Image(Main.protocol + "://" + Main.host + ":" + Main.port + "/" + console.getString("image")); 
-                imgConsole.setImage(image); 
+                Image image = new Image(
+                        Main.protocol + "://" + Main.host + ":" + Main.port + "/" + console.getString("image"));
+                imgConsole.setImage(image);
                 imgConsole.setFitWidth(200);
                 imgConsole.setPreserveRatio(true);
             } catch (Exception e) {

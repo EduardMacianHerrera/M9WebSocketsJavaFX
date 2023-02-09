@@ -18,8 +18,8 @@
             <Font size="22.0" />
          </font>
       </Label>
-      <TextField fx:id="serverIp" layoutX="67.0" layoutY="82.0" prefHeight="25.0" prefWidth="449.0" AnchorPane.bottomAnchor="309.0" AnchorPane.leftAnchor="67.0" AnchorPane.rightAnchor="53.0" AnchorPane.topAnchor="82.0" />
-      <TextField fx:id="port" layoutX="67.0" layoutY="263.0" prefHeight="25.0" prefWidth="449.0" AnchorPane.bottomAnchor="128.0" AnchorPane.leftAnchor="67.0" AnchorPane.rightAnchor="53.0" AnchorPane.topAnchor="263.0" />
+      <TextField fx:id="serverIp" layoutX="67.0" layoutY="82.0" prefHeight="25.0" prefWidth="449.0" text="localhost" AnchorPane.bottomAnchor="309.0" AnchorPane.leftAnchor="67.0" AnchorPane.rightAnchor="53.0" AnchorPane.topAnchor="82.0" />
+      <TextField fx:id="port" layoutX="67.0" layoutY="263.0" prefHeight="25.0" prefWidth="449.0" text="3000" AnchorPane.bottomAnchor="128.0" AnchorPane.leftAnchor="67.0" AnchorPane.rightAnchor="53.0" AnchorPane.topAnchor="263.0" />
       <Button layoutX="244.0" layoutY="339.0" mnemonicParsing="false" onAction="#loginServer" text="Conectar" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="244.0" AnchorPane.rightAnchor="239.0" AnchorPane.topAnchor="339.0">
          <font>
             <Font size="16.0" />

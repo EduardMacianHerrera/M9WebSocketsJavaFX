@@ -14,6 +14,7 @@ public class ControllerLogin {
         System.out.println("test");
         Main2.socketClient = UtilsWS
                 .getSharedInstance(Main2.protocolWS + "://" + serverIp.getText() + ":" + port.getText());
+        UtilsViews.setViewAnimating("ViewFiltres");
     }
 
 }

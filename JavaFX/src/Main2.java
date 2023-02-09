@@ -21,6 +21,8 @@ public class Main2 extends Application {
         UtilsViews.addView(getClass(), "ViewCPUs", "./assets/viewCPUs.fxml");
         UtilsViews.addView(getClass(), "ViewLogin", "./assets/viewLogin.fxml");
         UtilsViews.addView(getClass(), "ViewDades", "./assets/viewDades.fxml");
+        UtilsViews.addView(getClass(), "ViewMarques", "./assets/viewMarques.fxml");
+        UtilsViews.addView(getClass(), "ViewItemConsola", "./assets/viewItemConsola.fxml");
 
         Scene scene = new Scene(UtilsViews.parentContainer);
 
