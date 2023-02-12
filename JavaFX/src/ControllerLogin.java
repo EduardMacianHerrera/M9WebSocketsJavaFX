@@ -12,8 +12,10 @@ public class ControllerLogin {
     @FXML
     private void loginServer() {
         System.out.println("test");
-        Main2.socketClient = UtilsWS
-                .getSharedInstance(Main2.protocolWS + "://" + serverIp.getText() + ":" + port.getText());
+        Main.socketClient = UtilsWS
+                .getSharedInstance(Main.protocolWS + "://" + serverIp.getText() + ":" + port.getText());
+        Main.host = serverIp.getText();
+        Main.port = port.getText();
         UtilsViews.setViewAnimating("ViewFiltres");
     }
 

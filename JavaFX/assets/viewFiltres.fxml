@@ -32,5 +32,6 @@
             <Font name="Arial Bold" size="35.0" />
          </font>
       </Label>
+      <Button layoutX="14.0" layoutY="22.0" mnemonicParsing="false" onAction="#backButton" prefHeight="25.0" prefWidth="79.0" text="Atrás" />
    </children>
 </AnchorPane>

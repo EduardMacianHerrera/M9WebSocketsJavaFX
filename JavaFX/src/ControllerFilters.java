@@ -3,8 +3,12 @@ import javafx.fxml.FXML;
 public class ControllerFilters {
 
     @FXML
+    private void backButton(){
+        UtilsViews.setViewAnimating("ViewLogin");
+    }
+
+    @FXML
     private void loadMarques() {
-        System.out.println("Marques");
         ControllerMarques ctrlMarques = (ControllerMarques) UtilsViews.getController("ViewMarques");
         ctrlMarques.loadBrands();
         UtilsViews.setViewAnimating("ViewMarques");
@@ -12,12 +16,16 @@ public class ControllerFilters {
 
     @FXML
     private void loadColors() {
-        System.out.println("Colors");
+        ControllerColors crtlColors = (ControllerColors) UtilsViews.getController("ViewColors");
+        crtlColors.loadColors();
+        UtilsViews.setViewAnimating("ViewColors");
     }
 
     @FXML
     private void loadCPUs() {
-        System.out.println("CPUs");
+        ControllerCPUs ctrlCPUs = (ControllerCPUs) UtilsViews.getController("ViewCPUs");
+        ctrlCPUs.loadColors();
+        UtilsViews.setViewAnimating("ViewCPUs");
     }
 
     @FXML

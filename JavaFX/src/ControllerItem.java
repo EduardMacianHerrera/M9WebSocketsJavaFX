@@ -12,8 +12,7 @@ public class ControllerItem {
 
     @FXML
     private void handleMenuAction() {
-        Controller0 c0 = (Controller0) UtilsViews.getController("View0");
-        c0.loadConsoleInfo(title.getText());
+        System.out.println("test");
     }
 
     public void setTitle(String title) {

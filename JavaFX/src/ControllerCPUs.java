@@ -11,7 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 
-public class ControllerMarques {
+public class ControllerCPUs {
 
     private ObservableList<Button> listaBotones = FXCollections.observableArrayList();
 
@@ -22,18 +22,18 @@ public class ControllerMarques {
     }
 
     @FXML
-    private ListView<Button> listaMarques;
+    private ListView<Button> listaCPUs;
 
-    public void loadBrands() {
+    public void loadColors() {
         JSONObject obj = new JSONObject("{}");
-        obj.put("type", "marques");
+        obj.put("type", "cpus");
         UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", obj.toString(),
                 (response) -> {
-                    loadBrandsCallback(response);
+                    loadCPUsCallback(response);
                 });
     }
 
-    private void loadBrandsCallback(String response) {
+    private void loadCPUsCallback(String response) {
         JSONObject objResponse = new JSONObject(response);
         if (objResponse.getString("status").equals("OK")) {
             JSONArray JSONlist = objResponse.getJSONArray("result");
@@ -41,13 +41,13 @@ public class ControllerMarques {
                 Button button = new Button(JSONlist.getString(i));
                 button.setOnAction(event -> {
                     ControllerConsoles ctrlConsoles = (ControllerConsoles) UtilsViews.getController("ViewConsoles");
-                    ctrlConsoles.loadConsolesByBrand(button.getText());
-                    ctrlConsoles.setVistaAnterior("ViewMarques");
+                    ctrlConsoles.loadConsolesByCPU(button.getText());
+                    ctrlConsoles.setVistaAnterior("ViewCPUs");
                     UtilsViews.setViewAnimating("ViewConsoles");
                 });
                 listaBotones.add(button);
             }
-            listaMarques.setItems(listaBotones);
+            listaCPUs.setItems(listaBotones);
         }
     }
 

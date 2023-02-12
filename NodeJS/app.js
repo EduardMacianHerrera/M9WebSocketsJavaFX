@@ -88,15 +88,15 @@ async function getDades (req, res) {
       result = { status: "OK", result: objConsoleColorList } 
     }
     if (receivedPOST.type == "cpu") {
-      var objConsoleColorList = objConsolesList.filter ((obj) => { return obj.color == receivedPOST.color })
+      var objConsoleCPUList = objConsolesList.filter ((obj) => { return obj.processor == receivedPOST.processor })
       await wait(1500)
       // Ordena les consoles per nom de model
-      objConsoleColorList.sort((a,b) => { 
+      objConsoleCPUList.sort((a,b) => { 
           var textA = a.name.toUpperCase();
           var textB = b.name.toUpperCase();
           return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
       })
-      result = { status: "OK", result: objConsoleColorList } 
+      result = { status: "OK", result: objConsoleCPUList } 
     }
   }
 

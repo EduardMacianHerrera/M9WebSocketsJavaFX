@@ -15,10 +15,24 @@ import javafx.scene.layout.VBox;
 
 public class ControllerConsoles {
 
-    private ObservableList listaItems = FXCollections.observableArrayList();
+    private String vistaAnterior;
+
+    public String getVistaAnterior() {
+        return vistaAnterior;
+    }
+
+    public void setVistaAnterior(String vistaAnterior) {
+        this.vistaAnterior = vistaAnterior;
+    }
 
     @FXML
     private VBox listaConsolas;
+
+    @FXML
+    private void backButton(){
+        UtilsViews.setViewAnimating(vistaAnterior);
+        listaConsolas.getChildren().clear();
+    }
 
     public void loadConsoles() {
         // Cargar todas las consolas
@@ -70,5 +84,87 @@ public class ControllerConsoles {
             }
         }
     }
+
+    public void loadConsolesByColor(String color){
+        JSONObject obj = new JSONObject("{}");
+        obj.put("type", "color");
+        obj.put("color", color);
+
+        UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", obj.toString(),
+                (response) -> {
+                    loadConsolesByColorCallback(response);
+                });
+    }
+
+    public void loadConsolesByColorCallback(String response){
+        JSONObject objResponse = new JSONObject(response);
+        if (objResponse.getString("status").equals("OK")) {
+            JSONArray JSONlist = objResponse.getJSONArray("result");
+            URL resource = this.getClass().getResource("./assets/viewItemConsola.fxml");
+            for (int i = 0; i < JSONlist.length(); i++) {
+                JSONObject console = JSONlist.getJSONObject(i);
+
+                try {
+                    // Load template and set controller
+                    FXMLLoader loader = new FXMLLoader(resource);
+                    Parent itemTemplate = loader.load();
+                    ControllerItemConsola itemController = loader.getController();
+
+                    itemController.setNombreConsola(console.getString("name"));
+                    itemController.setMarca(console.getString("brand"));
+                    itemController.setProcesador(console.getString("processor"));
+                    itemController.setCirculo(console.getString("color"));
+
+                    // Add template to the list
+                    listaConsolas.getChildren().add(itemTemplate);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void loadConsolesByCPU(String cpu){
+        JSONObject obj = new JSONObject("{}");
+        obj.put("type", "cpu");
+        obj.put("processor", cpu);
+
+        UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", obj.toString(),
+                (response) -> {
+                    loadConsolesByCPUCallback(response);
+                });
+    }
+
+
+    public void loadConsolesByCPUCallback(String response){
+        JSONObject objResponse = new JSONObject(response);
+        if (objResponse.getString("status").equals("OK")) {
+            JSONArray JSONlist = objResponse.getJSONArray("result");
+            URL resource = this.getClass().getResource("./assets/viewItemConsola.fxml");
+            for (int i = 0; i < JSONlist.length(); i++) {
+                JSONObject console = JSONlist.getJSONObject(i);
+
+                try {
+                    // Load template and set controller
+                    FXMLLoader loader = new FXMLLoader(resource);
+                    Parent itemTemplate = loader.load();
+                    ControllerItemConsola itemController = loader.getController();
+
+                    itemController.setNombreConsola(console.getString("name"));
+                    itemController.setMarca(console.getString("brand"));
+                    itemController.setProcesador(console.getString("processor"));
+                    itemController.setCirculo(console.getString("color"));
+
+                    // Add template to the list
+                    listaConsolas.getChildren().add(itemTemplate);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
 
 }
