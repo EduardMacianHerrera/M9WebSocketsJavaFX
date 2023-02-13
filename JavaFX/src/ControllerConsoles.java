@@ -11,6 +11,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
 public class ControllerConsoles {
@@ -26,10 +28,21 @@ public class ControllerConsoles {
     }
 
     @FXML
+    private ProgressIndicator progressIndicator;
+
+    private void showLoading() {
+        progressIndicator.setVisible(true);
+    }
+
+    private void hideLoading() {
+        progressIndicator.setVisible(false);
+    }
+
+    @FXML
     private VBox listaConsolas;
 
     @FXML
-    private void backButton(){
+    private void backButton() {
         UtilsViews.setViewAnimating(vistaAnterior);
         listaConsolas.getChildren().clear();
     }
@@ -53,10 +66,12 @@ public class ControllerConsoles {
                 (response) -> {
                     loadConsolesByBrandCallback(response);
                 });
+
     }
 
     private void loadConsolesByBrandCallback(String response) {
         // Callback de las consolas por marca
+        showLoading();
         JSONObject objResponse = new JSONObject(response);
         if (objResponse.getString("status").equals("OK")) {
             JSONArray JSONlist = objResponse.getJSONArray("result");
@@ -75,6 +90,15 @@ public class ControllerConsoles {
                     itemController.setProcesador(console.getString("processor"));
                     itemController.setCirculo(console.getString("color"));
 
+                    try {
+                        Image image = new Image(
+                                Main.protocol + "://" + Main.host + ":" + Main.port + "/"
+                                        + console.getString("image"));
+                        itemController.setImagen(image);
+                    } catch (Exception e) {
+
+                    }
+
                     // Add template to the list
                     listaConsolas.getChildren().add(itemTemplate);
 
@@ -83,9 +107,10 @@ public class ControllerConsoles {
                 }
             }
         }
+        hideLoading();
     }
 
-    public void loadConsolesByColor(String color){
+    public void loadConsolesByColor(String color) {
         JSONObject obj = new JSONObject("{}");
         obj.put("type", "color");
         obj.put("color", color);
@@ -96,7 +121,8 @@ public class ControllerConsoles {
                 });
     }
 
-    public void loadConsolesByColorCallback(String response){
+    public void loadConsolesByColorCallback(String response) {
+        showLoading();
         JSONObject objResponse = new JSONObject(response);
         if (objResponse.getString("status").equals("OK")) {
             JSONArray JSONlist = objResponse.getJSONArray("result");
@@ -115,6 +141,15 @@ public class ControllerConsoles {
                     itemController.setProcesador(console.getString("processor"));
                     itemController.setCirculo(console.getString("color"));
 
+                    try {
+                        Image image = new Image(
+                                Main.protocol + "://" + Main.host + ":" + Main.port + "/"
+                                        + console.getString("image"));
+                        itemController.setImagen(image);
+                    } catch (Exception e) {
+
+                    }
+
                     // Add template to the list
                     listaConsolas.getChildren().add(itemTemplate);
 
@@ -123,9 +158,10 @@ public class ControllerConsoles {
                 }
             }
         }
+        hideLoading();
     }
 
-    public void loadConsolesByCPU(String cpu){
+    public void loadConsolesByCPU(String cpu) {
         JSONObject obj = new JSONObject("{}");
         obj.put("type", "cpu");
         obj.put("processor", cpu);
@@ -136,8 +172,8 @@ public class ControllerConsoles {
                 });
     }
 
-
-    public void loadConsolesByCPUCallback(String response){
+    public void loadConsolesByCPUCallback(String response) {
+        showLoading();
         JSONObject objResponse = new JSONObject(response);
         if (objResponse.getString("status").equals("OK")) {
             JSONArray JSONlist = objResponse.getJSONArray("result");
@@ -156,6 +192,15 @@ public class ControllerConsoles {
                     itemController.setProcesador(console.getString("processor"));
                     itemController.setCirculo(console.getString("color"));
 
+                    try {
+                        Image image = new Image(
+                                Main.protocol + "://" + Main.host + ":" + Main.port + "/"
+                                        + console.getString("image"));
+                        itemController.setImagen(image);
+                    } catch (Exception e) {
+
+                    }
+
                     // Add template to the list
                     listaConsolas.getChildren().add(itemTemplate);
 
@@ -164,7 +209,7 @@ public class ControllerConsoles {
                 }
             }
         }
+        hideLoading();
     }
-
 
 }

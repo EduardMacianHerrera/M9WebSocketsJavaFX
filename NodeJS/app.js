@@ -98,6 +98,11 @@ async function getDades (req, res) {
       })
       result = { status: "OK", result: objConsoleCPUList } 
     }
+    if (receivedPOST.type == "detalls"){
+      var objConsolesList = objConsolesList.filter((obj) => { if(obj.name == receivedPOST.name) return obj })
+      await wait(1500)
+      result = { status: "OK", result: objConsolesList } 
+    }
   }
 
   res.writeHead(200, { 'Content-Type': 'application/json' })

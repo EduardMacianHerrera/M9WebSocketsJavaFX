@@ -19,12 +19,11 @@ public class Main extends Application {
 
         UtilsViews.addView(getClass(), "ViewLogin", "./assets/viewLogin.fxml");
         UtilsViews.addView(getClass(), "ViewFiltres", "./assets/viewFiltres.fxml");
-        UtilsViews.addView(getClass(), "ViewConsoles", "./assets/viewConsoles.fxml");
+        UtilsViews.addView(getClass(), "ViewMarques", "./assets/viewMarques.fxml");
         UtilsViews.addView(getClass(), "ViewColors", "./assets/viewColors.fxml");
         UtilsViews.addView(getClass(), "ViewCPUs", "./assets/viewCPUs.fxml");
-        UtilsViews.addView(getClass(), "ViewLogin", "./assets/viewLogin.fxml");
+        UtilsViews.addView(getClass(), "ViewConsoles", "./assets/viewConsoles.fxml");
         UtilsViews.addView(getClass(), "ViewDades", "./assets/viewDades.fxml");
-        UtilsViews.addView(getClass(), "ViewMarques", "./assets/viewMarques.fxml");
         UtilsViews.addView(getClass(), "ViewItemConsola", "./assets/viewItemConsola.fxml");
 
         Scene scene = new Scene(UtilsViews.parentContainer);
